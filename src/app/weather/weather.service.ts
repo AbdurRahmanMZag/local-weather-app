@@ -39,14 +39,18 @@ export class WeatherService {
 
  transformToICurrentWeather(data: ICurrentWeatherData): ICurrentWeather {
 
-  return {
-    city: data.name,
-    country:data.sys.country,
-    date: data.dt * 1000,
-    image:
-    `http://openweathermap.org/img/w/${data.weather[0].icon}.png`,
-    description:data.weather[0].description,
-    temperature:data.main.temp
-  };
-}
+   return {
+        city: data.name,
+        country:data.sys.country,
+        date: data.dt * 1000,
+        image:
+        `http://openweathermap.org/img/w/${data.weather[0].icon}.png`,
+        description:data.weather[0].description,
+        temperature: this.convertKelvinToFahrenheit(data.main.temp),
+      };
+  }
+  private convertKelvinToFahrenheit(kelvin: number): number
+  {
+  return kelvin * 9 / 5 - 459.67
+  }
 }
