@@ -15,7 +15,7 @@ import { Component } from '@angular/core'
       <div fxLayout="row">
         <div fxFlex></div>
 
-        <mat-card fxFlex="300 px">
+        <mat-card fxFlex="300px">
           <mat-card-header>
             <mat-card-title class="">
               <div class="mat-headline">Current Weather</div>
