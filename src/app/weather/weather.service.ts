@@ -29,14 +29,14 @@ export interface ICurrentWeatherData {
 export class WeatherService {
   constructor(private httpClient: HttpClient) {}
   getCurrentWeather(search: string | number, country: string) {
-    const uriParams = new HttpParams()
+    let uriParams = new HttpParams()
     if (typeof search === 'string') {
-      uriParams.set('q', country ? `${search},${country}` : search)
+      uriParams = uriParams.set('q', country ? `${search},${country}` : `${search}`)
     } else {
-      uriParams.set('zip', `${search}`)
+      uriParams = uriParams.set('zip', `${search}`)
     }
 
-    uriParams.set('appid', environment.appId)
+    uriParams = uriParams.set('appid', environment.appId)
     return this.getCurrentWeatherHelper(uriParams)
   }
   private getCurrentWeatherHelper(uriParams: HttpParams) {
