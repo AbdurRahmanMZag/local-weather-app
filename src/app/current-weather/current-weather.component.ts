@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
+import { Observable } from 'rxjs'
 
-import { ICurrentWeatherData, WeatherService } from './../weather/weather.service'
+import { WeatherService } from './../weather/weather.service'
 import { ICurrentWeather } from '../interfaces'
 
 @Component({
@@ -9,21 +10,12 @@ import { ICurrentWeather } from '../interfaces'
   styleUrls: ['./current-weather.component.css'],
 })
 export class CurrentWeatherComponent implements OnInit {
-  current: ICurrentWeather
+  current$: Observable<ICurrentWeather>
   constructor(private weatherService: WeatherService) {
-    // this.current = {
-    //   city: '',
-    //   country: '',
-    //   date: 0,
-    //   image: '',
-    //   temperature: 0,
-    //   description: '',
-    //   }
+    this.current$ = this.weatherService.currentWeather$
   }
 
-  ngOnInit(): void {
-    this.weatherService.currentWeather$.subscribe((data) => (this.current = data))
-  }
+  ngOnInit(): void {}
   getOrdinal(date: number) {
     const n = new Date(date).getDate()
     return n > 0
